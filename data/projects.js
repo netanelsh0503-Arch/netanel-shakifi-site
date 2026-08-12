@@ -1,0 +1,96 @@
+window.SITE_PROJECTS = [
+  {
+    "id": "naama-grove",
+    "title": "חורשת נעמה",
+    "location": "כפר סבא",
+    "year": "2023",
+    "tags": [
+      "הנצחה",
+      "מרחב ציבורי"
+    ],
+    "description": "פרויקט הנצחה שנוצר לזכרה של נעמה מועלם ז\"ל, שנרצחה במסיבת הנובה ב-7.10.23. תכנון חורשה קהילתית המשלבת מקום התכנסות, שתילת עצים וצמחייה עונתית, ואלמנט זיכרון מרכזי.",
+    "cover": "assets/img/web/naama-1.jpg",
+    "images": [
+      "assets/img/web/naama-1.jpg",
+      "assets/img/web/naama-2.jpg",
+      "assets/img/web/naama-3.jpg",
+      "assets/img/web/naama-4.jpg"
+    ]
+  },
+  {
+    "id": "lod-competition",
+    "title": "תחרות שצ\"פ – לוד",
+    "location": "לוד",
+    "year": "2024",
+    "tags": [
+      "תחרות",
+      "מרחב ציבורי",
+      "הדמיות"
+    ],
+    "description": "הצעה תכנונית לשטח ציבורי פתוח (שצ\"פ) במסגרת תחרות עירונית. תכנון כיכר עירונית עם אלמנט מים, שדרת עצים וריהוט רחוב, מתוך דגש על חיבור בין המרחב הבנוי לפתוח ועל פיתוח בר-קיימא.",
+    "cover": "assets/img/web/lod-1.jpg",
+    "images": [
+      "assets/img/web/lod-1.jpg",
+      "assets/img/web/lod-2.jpg"
+    ]
+  },
+  {
+    "id": "boaz-center",
+    "title": "מרכז בועז – תל אביב",
+    "location": "תל אביב",
+    "year": "2024",
+    "tags": [
+      "מרחב ציבורי",
+      "הדמיות"
+    ],
+    "description": "תכנון מרחב ציבורי סביב מרכז מסחרי-קהילתי, הכולל כיכר מרוצפת, אזורי ישיבה מוצלים ושילוב צמחייה עירונית ליצירת מקום מפגש חי ונעים.",
+    "cover": "assets/img/web/boaz-1.jpg",
+    "images": [
+      "assets/img/web/boaz-1.jpg"
+    ]
+  },
+  {
+    "id": "rahat-school",
+    "title": "בית ספר – רהט",
+    "location": "רהט",
+    "year": "2024",
+    "tags": [
+      "מוסדות חינוך",
+      "הדמיות"
+    ],
+    "description": "תכנון חצר ומרחבי חוץ למוסד חינוכי במסגרת קול קורא. יצירת חצר לימודית ירוקה עם אזורי ישיבה, הצללה טבעית וגינון חינוכי.",
+    "cover": "assets/img/web/rahat-1.jpg",
+    "images": [
+      "assets/img/web/rahat-1.jpg"
+    ]
+  },
+  {
+    "id": "private-garden",
+    "title": "תכנון נוף לבית פרטי",
+    "location": "מרכז הארץ",
+    "year": "2023",
+    "tags": [
+      "בית פרטי"
+    ],
+    "description": "תכנון כולל של מגרש פרטי: שבילים, אזורי ישיבה, חניות וכניסות, בהתאמה לתנאי השטח והשיפועים. שילוב נכון של צמחייה לפי אקלים ותחזוקה, יצירת פרטיות והצללה, וחיבור בין פנים הבית לחוץ.",
+    "cover": "assets/img/web/private-1.jpg",
+    "images": [
+      "assets/img/web/private-1.jpg",
+      "assets/img/web/private-2.jpg"
+    ]
+  },
+  {
+    "id": "tree-survey",
+    "title": "סקר עצים",
+    "location": "",
+    "year": "",
+    "tags": [
+      "סקר עצים"
+    ],
+    "description": "הכנת סקר עצים מקצועי הכולל מיפוי, תיעוד והערכת מצב העצים בשטח התכנון, נספח לסקר, חוברת והגשה לפקיד היערות עד לקבלת אישורו. הסקר משמש כלי תכנוני בקבלת החלטות אדריכליות, סביבתיות וחוקיות.",
+    "cover": "assets/img/web/trees-1.jpg",
+    "images": [
+      "assets/img/web/trees-1.jpg"
+    ]
+  }
+];
