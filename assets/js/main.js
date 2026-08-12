@@ -65,7 +65,7 @@
     return `
       <article class="project-card reveal" data-idx="${idx}" tabindex="0" role="button" aria-label="פתיחת פרויקט ${esc(p.title)}">
         <div class="project-media">
-          <img src="${esc(p.cover || (p.images || [])[0] || "")}" alt="${esc(p.title)}" loading="lazy">
+          <img src="${esc(nsrc(p.cover || (p.images || [])[0] || ""))}" alt="${esc(p.title)}" loading="lazy">
           ${p.video ? `<span class="project-play">${IC.play}</span>` : ""}
           ${count > 1 ? `<span class="project-count">${IC.imgs}${count}</span>` : ""}
         </div>
@@ -138,9 +138,9 @@
     const media = [];
     if (p.video) {
       const v = videoEmbed(p.video);
-      if (v) media.push({ type: "video", kind: v.kind, src: v.src, thumb: v.thumb || p.cover || (p.images || [])[0] || "" });
+      if (v) media.push({ type: "video", kind: v.kind, src: v.src, thumb: v.thumb || nsrc(p.cover || (p.images || [])[0] || "") });
     }
-    (p.images || []).forEach((s) => media.push({ type: "img", src: s, thumb: s }));
+    (p.images || []).forEach((s) => media.push({ type: "img", src: nsrc(s), thumb: nsrc(s) }));
     return media;
   }
 
@@ -276,7 +276,7 @@
     const set = (id, v) => { const e = document.getElementById(id); if (e && v != null) e.textContent = v; };
     set("aboutEyebrow", a.eyebrow);
     set("aboutTitle", a.title);
-    if (a.image) { const im = document.getElementById("aboutImg"); if (im) im.src = a.image; }
+    if (a.image) { const im = document.getElementById("aboutImg"); if (im) im.src = nsrc(a.image); }
     const w = document.getElementById("aboutParas");
     if (w && Array.isArray(a.paragraphs)) w.innerHTML = a.paragraphs.map((p) => `<p>${esc(p)}</p>`).join("");
   }
@@ -305,7 +305,7 @@
     document.getElementById("amEyebrow").textContent = a.eyebrow || "";
     document.getElementById("amTitle").textContent = a.title || "אודות";
     const im = document.getElementById("amImg");
-    if (a.image) { im.src = a.image; im.parentElement.style.display = ""; } else { im.parentElement.style.display = "none"; }
+    if (a.image) { im.src = nsrc(a.image); im.parentElement.style.display = ""; } else { im.parentElement.style.display = "none"; }
     document.getElementById("amBody").innerHTML = (a.paragraphs || []).map((p) => `<p>${esc(p)}</p>`).join("");
     aboutModal.classList.add("open");
     document.body.style.overflow = "hidden";
@@ -318,7 +318,7 @@
   const aboutMoreBtn = document.getElementById("aboutMoreBtn");
   if (aboutMoreBtn) aboutMoreBtn.addEventListener("click", openAbout);
 
-  applyAbout(window.SITE_ABOUT);
+  fetchJSON("data/about.json").then(applyAbout);
 
   /* ---------- Services / Publications / Innovations ---------- */
   const SERVICE_ICONS = {
@@ -368,6 +368,22 @@
     el.querySelectorAll(".reveal").forEach((x) => io.observe(x));
   }
 
+  /* ---------- Data helpers ---------- */
+  function fetchJSON(url) {
+    return fetch(url, { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  }
+  function listOf(d) {
+    if (d && Array.isArray(d.items)) return d.items;
+    return Array.isArray(d) ? d : [];
+  }
+  // Normalize an image path: strip a leading "/" so CMS-stored absolute paths
+  // resolve correctly under the GitHub Pages sub-path. External URLs (http...) are untouched.
+  function nsrc(s) {
+    s = String(s == null ? "" : s);
+    if (/^https?:\/\//i.test(s) || s.startsWith("data:")) return s;
+    return s.charAt(0) === "/" ? s.slice(1) : s;
+  }
+
   /* ---------- Helpers ---------- */
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, (c) =>
@@ -375,13 +391,13 @@
     );
   }
 
-  /* ---------- Load data (from data/*.js globals) ---------- */
-  PROJECTS = Array.isArray(window.SITE_PROJECTS) ? window.SITE_PROJECTS : [];
-  renderFilters();
-  renderProjects();
-  renderServices(window.SITE_SERVICES);
-  renderPublications(window.SITE_PUBLICATIONS);
-  renderInnovations(window.SITE_INNOVATIONS);
+  /* ---------- Load data (from data/*.json — editable via CMS) ---------- */
+  fetchJSON("data/projects.json").then((d) => {
+    if (d) { PROJECTS = listOf(d); renderFilters(); renderProjects(); }
+  });
+  fetchJSON("data/services.json").then((d) => { if (d) renderServices(listOf(d)); });
+  fetchJSON("data/publications.json").then((d) => { if (d) renderPublications(listOf(d)); });
+  fetchJSON("data/innovations.json").then((d) => { if (d) renderInnovations(listOf(d)); });
 
   document.getElementById("year") && (document.getElementById("year").textContent = new Date().getFullYear());
 })();
