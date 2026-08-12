@@ -1,0 +1,81 @@
+media:
+  input: assets/img/uploads
+  output: /assets/img/uploads
+
+content:
+  - name: projects
+    label: פרויקטים
+    type: file
+    path: data/projects.json
+    fields:
+      - name: items
+        label: פרויקטים
+        type: object
+        list: true
+        fields:
+          - { name: title, label: שם הפרויקט, type: string, required: true }
+          - { name: location, label: מיקום, type: string }
+          - { name: year, label: שנה, type: string }
+          - { name: tags, label: תגיות, type: string, list: true }
+          - { name: description, label: תיאור, type: text }
+          - { name: cover, label: תמונת שער, type: image }
+          - { name: images, label: תמונות (גלריה), type: image, list: true }
+          - { name: video, label: "קישור לסרטון (YouTube/Vimeo)", type: string }
+          - { name: link, label: קישור לאתר רשמי, type: string }
+          - { name: linkLabel, label: טקסט הכפתור לאתר, type: string }
+
+  - name: about
+    label: אודות
+    type: file
+    path: data/about.json
+    fields:
+      - { name: eyebrow, label: כותרת עליונה קטנה, type: string }
+      - { name: title, label: כותרת ראשית, type: string }
+      - { name: image, label: תמונה, type: image }
+      - { name: paragraphs, label: פסקאות, type: text, list: true }
+
+  - name: services
+    label: תחומי התמחות
+    type: file
+    path: data/services.json
+    fields:
+      - name: items
+        label: תחומי התמחות
+        type: object
+        list: true
+        fields:
+          - name: icon
+            label: אייקון
+            type: select
+            options:
+              values: [plant, grid, tree, home, leaf, water, sun, people]
+          - { name: title, label: כותרת, type: string, required: true }
+          - { name: text, label: תיאור, type: text }
+
+  - name: publications
+    label: פרסומים
+    type: file
+    path: data/publications.json
+    fields:
+      - name: items
+        label: פרסומים
+        type: object
+        list: true
+        fields:
+          - { name: date, label: תאריך / שנה, type: string }
+          - { name: title, label: כותרת, type: string, required: true }
+          - { name: text, label: תיאור, type: text }
+
+  - name: innovations
+    label: חידושים באדריכלות נוף
+    type: file
+    path: data/innovations.json
+    fields:
+      - name: items
+        label: חידושים
+        type: object
+        list: true
+        fields:
+          - { name: kw, label: מילת מפתח, type: string }
+          - { name: title, label: כותרת, type: string, required: true }
+          - { name: text, label: תיאור, type: text }

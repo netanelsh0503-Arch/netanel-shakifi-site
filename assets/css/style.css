@@ -144,7 +144,8 @@ h1, h2, h3, h4 { font-family: var(--ff-head); font-weight: 700; line-height: 1.2
 
 /* ---------- Stats strip ---------- */
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
-.stat b { display: block; font-family: var(--ff-head); font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--teal-deep); }
+.stat { min-width: 0; }
+.stat b { display: block; font-family: var(--ff-head); font-size: clamp(1.5rem, 3.4vw, 2.8rem); color: var(--teal-deep); overflow-wrap: break-word; }
 .stat span { color: var(--muted); font-size: .95rem; }
 
 /* ---------- About ---------- */
@@ -160,7 +161,7 @@ h1, h2, h3, h4 { font-family: var(--ff-head); font-weight: 700; line-height: 1.2
 .about-sign { margin-top: 22px; height: 92px; width: auto; }
 
 /* ---------- Services ---------- */
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 46px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 24px; margin-top: 46px; }
 .card {
   background: var(--surface); border-radius: var(--radius); padding: 32px 28px;
   box-shadow: var(--shadow-sm); border: 1px solid var(--line);
@@ -184,7 +185,7 @@ h1, h2, h3, h4 { font-family: var(--ff-head); font-weight: 700; line-height: 1.2
 .filter:hover { border-color: var(--sage); color: var(--teal-deep); }
 .filter.active { background: var(--teal-deep); border-color: var(--teal-deep); color: #fff; }
 
-.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 24px; }
+.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 310px), 1fr)); gap: 24px; }
 .project-card {
   background: var(--surface); border-radius: var(--radius); overflow: hidden;
   box-shadow: var(--shadow-sm); border: 1px solid var(--line); cursor: pointer;
@@ -225,7 +226,7 @@ h1, h2, h3, h4 { font-family: var(--ff-head); font-weight: 700; line-height: 1.2
 .pub-src svg { width: 20px; height: 20px; }
 
 /* ---------- Innovations ---------- */
-.innov-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 44px; }
+.innov-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 24px; margin-top: 44px; }
 .innov {
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 30px 28px; box-shadow: var(--shadow-sm); border-inline-start: 4px solid var(--sage);
