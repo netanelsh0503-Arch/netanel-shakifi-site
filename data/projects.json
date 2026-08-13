@@ -2,36 +2,24 @@
   "items": [
     {
       "title": "חורשת נעמה",
-      "location": "כפר סבא",
+      "location": "שדה נחום",
       "year": "2023",
       "tags": [
         "הנצחה",
         "מרחב ציבורי"
       ],
-      "description": "פרויקט הנצחה שנוצר לזכרה של נעמה מועלם ז\"ל, שנרצחה במסיבת הנובה ב-7.10.23. תכנון חורשה קהילתית המשלבת מקום התכנסות, שתילת עצים וצמחייה עונתית, ואלמנט זיכרון מרכזי.",
+      "description": "פרויקט הנצחה שנוצר לזכרה של נעמה מועלם ז\"ל, שנרצחה במסיבת הנובה ב-7.10.23. תכנון חורשה קהילתית  המשלבת מקום התכנסות ואלמנט זיכרון מרכזי להמשך המורשת שלה.",
       "cover": "assets/img/web/naama-1.jpg",
       "images": [
-        "assets/img/web/naama-1.jpg",
-        "assets/img/web/naama-2.jpg",
-        "assets/img/web/naama-3.jpg",
-        "assets/img/web/naama-4.jpg"
-      ]
-    },
-    {
-      "title": "תחרות שצ\"פ – לוד",
-      "location": "לוד",
-      "year": "2024",
-      "tags": [
-        "תחרות",
-        "מרחב ציבורי",
-        "הדמיות"
+        "/assets/img/uploads/התוכנית.png",
+        "/assets/img/uploads/WhatsApp Image 2026-08-13 at 19.27.15.jpeg",
+        "/assets/img/uploads/תמונה של WhatsApp‏ 2025-02-05 בשעה 20.55.00_9b5813fe.jpg",
+        "/assets/img/uploads/תמונה של WhatsApp‏ 2025-02-05 בשעה 20.55.03_5e4c54b7.jpg",
+        "/assets/img/uploads/WhatsApp Image 2026-08-11 at 22.14.48.jpeg",
+        "/assets/img/uploads/WhatsApp Image 2026-08-13  9.27.15.jpeg",
+        "/assets/img/uploads/תמונה של WhatsApp‏ 2025-02-05 בשעה 20.55.07_5a3db4cc.jpg"
       ],
-      "description": "הצעה תכנונית לשטח ציבורי פתוח (שצ\"פ) במסגרת תחרות עירונית. תכנון כיכר עירונית עם אלמנט מים, שדרת עצים וריהוט רחוב, מתוך דגש על חיבור בין המרחב הבנוי לפתוח ועל פיתוח בר-קיימא.",
-      "cover": "assets/img/web/lod-1.jpg",
-      "images": [
-        "assets/img/web/lod-1.jpg",
-        "assets/img/web/lod-2.jpg"
-      ]
+      "link": "https://hurshat-naama.co.il/"
     },
     {
       "title": "מרכז בועז – תל אביב",
@@ -41,11 +29,7 @@
         "מרחב ציבורי",
         "הדמיות"
       ],
-      "description": "תכנון מרחב ציבורי סביב מרכז מסחרי-קהילתי, הכולל כיכר מרוצפת, אזורי ישיבה מוצלים ושילוב צמחייה עירונית ליצירת מקום מפגש חי ונעים.",
-      "cover": "assets/img/web/boaz-1.jpg",
-      "images": [
-        "assets/img/web/boaz-1.jpg"
-      ]
+      "description": "תכנון מרחב ציבורי סביב מרכז מסחרי-קהילתי, הכולל כיכר מרוצפת, אזורי ישיבה מוצלים ושילוב צמחייה עירונית ליצירת מקום מפגש חי ונעים."
     },
     {
       "title": "בית ספר – רהט",
@@ -77,8 +61,6 @@
     },
     {
       "title": "סקר עצים",
-      "location": "",
-      "year": "",
       "tags": [
         "סקר עצים"
       ],
