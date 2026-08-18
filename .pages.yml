@@ -52,30 +52,15 @@ content:
           - { name: title, label: כותרת, type: string, required: true }
           - { name: text, label: תיאור, type: text }
 
-  - name: publications
-    label: פרסומים
+  - name: clients
+    label: בין לקוחותיי
     type: file
-    path: data/publications.json
+    path: data/clients.json
     fields:
       - name: items
-        label: פרסומים
+        label: לקוחות
         type: object
         list: true
         fields:
-          - { name: date, label: תאריך / שנה, type: string }
-          - { name: title, label: כותרת, type: string, required: true }
-          - { name: text, label: תיאור, type: text }
-
-  - name: innovations
-    label: חידושים באדריכלות נוף
-    type: file
-    path: data/innovations.json
-    fields:
-      - name: items
-        label: חידושים
-        type: object
-        list: true
-        fields:
-          - { name: kw, label: מילת מפתח, type: string }
-          - { name: title, label: כותרת, type: string, required: true }
-          - { name: text, label: תיאור, type: text }
+          - { name: logo, label: לוגו, type: image }
+          - { name: name, label: "שם הלקוח (לא חובה, לזיהוי)", type: string }

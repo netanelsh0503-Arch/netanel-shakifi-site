@@ -344,27 +344,16 @@
     el.querySelectorAll(".reveal").forEach((x) => io.observe(x));
   }
 
-  function renderPublications(list) {
-    const el = document.getElementById("pubList");
+  function renderClients(list) {
+    const el = document.getElementById("clientsGrid");
     if (!el || !Array.isArray(list)) return;
-    if (!list.length) { el.innerHTML = `<p class="empty">אין פרסומים עדיין.</p>`; return; }
-    el.innerHTML = list.map((p) => `
-      <div class="pub reveal">
-        <div class="pub-date">${esc(p.date)}</div>
-        <div class="pub-body"><h4>${esc(p.title)}</h4>${p.text ? `<p>${esc(p.text)}</p>` : ""}</div>
-      </div>`).join("");
-    el.querySelectorAll(".reveal").forEach((x) => io.observe(x));
-  }
-
-  function renderInnovations(list) {
-    const el = document.getElementById("innovGrid");
-    if (!el || !Array.isArray(list)) return;
-    el.innerHTML = list.map((n) => `
-      <div class="innov reveal">
-        ${n.kw ? `<span class="kw">${esc(n.kw)}</span>` : ""}
-        <h3>${esc(n.title)}</h3>
-        <p>${esc(n.text)}</p>
-      </div>`).join("");
+    if (!list.length) {
+      el.innerHTML = `<p class="empty">בקרוב — לוגואים של לקוחות ושותפים.</p>`;
+      return;
+    }
+    el.innerHTML = list.map((c) =>
+      `<div class="client reveal"><img src="${esc(nsrc(c.logo || ""))}" alt="${esc(c.name || "לקוח")}" loading="lazy"></div>`
+    ).join("");
     el.querySelectorAll(".reveal").forEach((x) => io.observe(x));
   }
 
@@ -396,8 +385,7 @@
     if (d) { PROJECTS = listOf(d); renderFilters(); renderProjects(); }
   });
   fetchJSON("data/services.json").then((d) => { if (d) renderServices(listOf(d)); });
-  fetchJSON("data/publications.json").then((d) => { if (d) renderPublications(listOf(d)); });
-  fetchJSON("data/innovations.json").then((d) => { if (d) renderInnovations(listOf(d)); });
+  fetchJSON("data/clients.json").then((d) => { if (d) renderClients(listOf(d)); });
 
   document.getElementById("year") && (document.getElementById("year").textContent = new Date().getFullYear());
 })();
