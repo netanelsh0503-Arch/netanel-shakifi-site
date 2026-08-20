@@ -62,10 +62,11 @@
       p.year ? `<span>${IC.cal}${esc(p.year)}</span>` : "",
     ].join("");
     const count = (p.images || []).length;
+    const coverSrc = nsrc(p.cover || (p.images || [])[0] || "");
     return `
       <article class="project-card reveal" data-idx="${idx}" tabindex="0" role="button" aria-label="פתיחת פרויקט ${esc(p.title)}">
         <div class="project-media">
-          <img src="${esc(nsrc(p.cover || (p.images || [])[0] || ""))}" alt="${esc(p.title)}" loading="lazy">
+          ${coverSrc ? `<img src="${esc(coverSrc)}" alt="${esc(p.title)}" loading="lazy">` : ""}
           ${p.video ? `<span class="project-play">${IC.play}</span>` : ""}
           ${count > 1 ? `<span class="project-count">${IC.imgs}${count}</span>` : ""}
         </div>

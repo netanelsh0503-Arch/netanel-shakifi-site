@@ -9,15 +9,19 @@
         "מרחב ציבורי"
       ],
       "description": "פרויקט הנצחה שנוצר לזכרה של נעמה מועלם ז\"ל, שנרצחה במסיבת הנובה ב-7.10.23. תכנון חורשה קהילתית  המשלבת מקום התכנסות ואלמנט זיכרון מרכזי להמשך המורשת שלה.",
-      "cover": "assets/img/web/naama-1.jpg",
+      "cover": "assets/img/projects/naama/7.jpg",
       "images": [
-        "/assets/img/uploads/התוכנית.png",
-        "/assets/img/uploads/WhatsApp Image 2026-08-13 at 19.27.15.jpeg",
-        "/assets/img/uploads/תמונה של WhatsApp‏ 2025-02-05 בשעה 20.55.00_9b5813fe.jpg",
-        "/assets/img/uploads/תמונה של WhatsApp‏ 2025-02-05 בשעה 20.55.03_5e4c54b7.jpg",
-        "/assets/img/uploads/WhatsApp Image 2026-08-11 at 22.14.48.jpeg",
-        "/assets/img/uploads/WhatsApp Image 2026-08-13  9.27.15.jpeg",
-        "/assets/img/uploads/תמונה של WhatsApp‏ 2025-02-05 בשעה 20.55.07_5a3db4cc.jpg"
+        "assets/img/projects/naama/1.jpg",
+        "assets/img/projects/naama/2.jpg",
+        "assets/img/projects/naama/3.jpg",
+        "assets/img/projects/naama/4.jpg",
+        "assets/img/projects/naama/5.jpg",
+        "assets/img/projects/naama/6.jpg",
+        "assets/img/projects/naama/7.jpg",
+        "assets/img/projects/naama/8.jpg",
+        "assets/img/projects/naama/9.jpg",
+        "assets/img/projects/naama/10.jpg",
+        "assets/img/projects/naama/11.jpg"
       ],
       "link": "https://hurshat-naama.co.il/"
     },
@@ -46,6 +50,25 @@
       ]
     },
     {
+      "title": "בית ספר – שגב שלום",
+      "location": "שגב שלום",
+      "year": "",
+      "tags": [
+        "מוסדות חינוך",
+        "הדמיות"
+      ],
+      "description": "תכנון והדמיה של חצר בית ספר בשגב שלום — יצירת מרחב לימודי-חברתי בלב בית הספר, הכולל כיכר מרכזית מוצלת בפרגולות, עץ מרכזי, אזורי ישיבה וגינון, ומעטפת כניסה מזמינה. התכנון משלב הצללה, צמחייה מקומית ומקומות מפגש שמזמינים את התלמידים לשהות וללמידה בחוץ.",
+      "cover": "assets/img/projects/segev/2.jpg",
+      "images": [
+        "assets/img/projects/segev/1.jpg",
+        "assets/img/projects/segev/2.jpg",
+        "assets/img/projects/segev/3.jpg",
+        "assets/img/projects/segev/4.jpg",
+        "assets/img/projects/segev/5.jpg",
+        "assets/img/projects/segev/6.jpg"
+      ]
+    },
+    {
       "title": "תכנון נוף לבית פרטי",
       "location": "מרכז הארץ",
       "year": "2023",
@@ -53,10 +76,15 @@
         "בית פרטי"
       ],
       "description": "תכנון כולל של מגרש פרטי: שבילים, אזורי ישיבה, חניות וכניסות, בהתאמה לתנאי השטח והשיפועים. שילוב נכון של צמחייה לפי אקלים ותחזוקה, יצירת פרטיות והצללה, וחיבור בין פנים הבית לחוץ.",
-      "cover": "assets/img/web/private-1.jpg",
+      "cover": "assets/img/projects/private/2.jpg",
       "images": [
-        "assets/img/web/private-1.jpg",
-        "assets/img/web/private-2.jpg"
+        "assets/img/projects/private/1.jpg",
+        "assets/img/projects/private/2.jpg",
+        "assets/img/projects/private/3.jpg",
+        "assets/img/projects/private/4.jpg",
+        "assets/img/projects/private/5.jpg",
+        "assets/img/projects/private/6.jpg",
+        "assets/img/projects/private/7.jpg"
       ]
     },
     {
