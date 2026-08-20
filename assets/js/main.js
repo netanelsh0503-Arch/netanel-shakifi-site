@@ -353,9 +353,8 @@
       return;
     }
     el.innerHTML = list.map((c) =>
-      `<div class="client reveal"><img src="${esc(nsrc(c.logo || ""))}" alt="${esc(c.name || "לקוח")}" loading="lazy"></div>`
+      `<div class="client"><img src="${esc(nsrc(c.logo || ""))}" alt="${esc(c.name || "לקוח")}" loading="lazy"></div>`
     ).join("");
-    el.querySelectorAll(".reveal").forEach((x) => io.observe(x));
   }
 
   /* ---------- Data helpers ---------- */
