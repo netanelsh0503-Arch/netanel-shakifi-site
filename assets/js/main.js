@@ -352,10 +352,9 @@
       el.innerHTML = `<p class="empty">בקרוב — לוגואים של לקוחות ושותפים.</p>`;
       return;
     }
-    el.innerHTML = list.map((c) =>
-      `<div class="client reveal"><img src="${esc(nsrc(c.logo || ""))}" alt="${esc(c.name || "לקוח")}" loading="lazy"></div>`
-    ).join("");
-    el.querySelectorAll(".reveal").forEach((x) => io.observe(x));
+    const item = (c) => `<div class="client"><img src="${esc(nsrc(c.logo || ""))}" alt="${esc(c.name || "לקוח")}" loading="lazy"></div>`;
+    const set = list.map(item).join("");
+    el.innerHTML = `<div class="clients-marquee"><div class="clients-track">${set}${set}</div></div>`;
   }
 
   /* ---------- Data helpers ---------- */
