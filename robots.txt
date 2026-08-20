@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://netanelsh0503-arch.github.io/netanel-shakifi-site/sitemap.xml
