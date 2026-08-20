@@ -1,3 +1,36 @@
 {
-  "items": []
+  "items": [
+    {
+      "logo": "assets/img/clients/1.png",
+      "name": "עיריית פתח תקווה"
+    },
+    {
+      "logo": "assets/img/clients/2.png",
+      "name": "עיריית תל אביב-יפו"
+    },
+    {
+      "logo": "assets/img/clients/3.png",
+      "name": "עיריית אריאל"
+    },
+    {
+      "logo": "assets/img/clients/4.png",
+      "name": "קיבוץ ניר אליהו"
+    },
+    {
+      "logo": "assets/img/clients/5.png",
+      "name": "שדה נחום"
+    },
+    {
+      "logo": "assets/img/clients/6.png",
+      "name": "מועצת שגב שלום"
+    },
+    {
+      "logo": "assets/img/clients/7.png",
+      "name": "רדימיקס"
+    },
+    {
+      "logo": "assets/img/clients/8.png",
+      "name": "פרץ בוני הנגב"
+    }
+  ]
 }
