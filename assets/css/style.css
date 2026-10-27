@@ -280,6 +280,7 @@ html { scroll-behavior: smooth; }
 .contact-form .btn-primary { width: 100%; justify-content: center; margin-top: 6px; }
 .form-msg { margin-top: 14px; padding: 12px 16px; border-radius: var(--radius-sm); font-size: .95rem; display: none; }
 .form-msg.ok { display: block; background: rgba(110, 148, 144, .18); color: var(--teal-deep); }
+.form-msg.err { display: block; background: rgba(192, 57, 43, .12); color: #b23b2e; }
 
 /* ---------- Footer ---------- */
 .footer { background: var(--teal-deep); color: rgba(255, 255, 255, .82); padding: 54px 0 26px; }

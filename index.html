@@ -70,7 +70,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=6">
+  <link rel="stylesheet" href="assets/css/style.css?v=7">
 </head>
 <body>
 
@@ -221,6 +221,10 @@
       </div>
 
       <form class="contact-form reveal" id="contactForm" novalidate>
+        <input type="hidden" name="access_key" value="b95d1b3d-62b8-4b41-ad89-b3573a08d3fc">
+        <input type="hidden" name="subject" value="פנייה חדשה מהאתר - נתנאל שקיפי אדריכלות נוף">
+        <input type="hidden" name="from_name" value="אתר נתנאל שקיפי">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="field">
           <label for="name">שם מלא</label>
           <input type="text" id="name" name="name" required autocomplete="name" placeholder="השם שלך">
@@ -238,7 +242,7 @@
           <textarea id="message" name="message" required placeholder="ספרו לי על הפרויקט..."></textarea>
         </div>
         <button type="submit" class="btn btn-primary">שליחת פנייה</button>
-        <p class="form-note">הפנייה תיפתח כהודעת אימייל מוכנה לשליחה.</p>
+        <p class="form-note">הפנייה נשלחת ישירות אליי ואחזור אליכם בהקדם.</p>
         <div class="form-msg" id="formMsg" role="alert"></div>
       </form>
     </div>
@@ -276,6 +280,6 @@
   </footer>
 
   <!-- Site content is in data/*.json and is editable via the online CMS. -->
-  <script src="assets/js/main.js?v=2"></script>
+  <script src="assets/js/main.js?v=3"></script>
 </body>
 </html>

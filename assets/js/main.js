@@ -246,25 +246,34 @@
     document.body.style.overflow = "";
   }
 
-  /* ---------- Contact form (mailto fallback) ---------- */
+  /* ---------- Contact form (Web3Forms) ---------- */
   const form = document.getElementById("contactForm");
   if (form) {
-    form.addEventListener("submit", (e) => {
+    const note = document.getElementById("formMsg");
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const d = new FormData(form);
-      const name = (d.get("name") || "").toString().trim();
-      const phone = (d.get("phone") || "").toString().trim();
-      const email = (d.get("email") || "").toString().trim();
-      const msg = (d.get("message") || "").toString().trim();
-      const body =
-        `שם: ${name}\nטלפון: ${phone}\nאימייל: ${email}\n\nהודעה:\n${msg}`;
-      const mailto =
-        "mailto:netanelsh0503@gmail.com?subject=" +
-        encodeURIComponent("פנייה מהאתר – " + name) +
-        "&body=" + encodeURIComponent(body);
-      window.location.href = mailto;
-      const note = document.getElementById("formMsg");
-      if (note) { note.classList.add("ok"); note.textContent = "תודה! נפתחת עבורך הודעת אימייל מוכנה לשליחה. אם לא נפתחה, אפשר לפנות ישירות לנייד 050-589-1004."; }
+      const btn = form.querySelector('button[type="submit"]');
+      const originalLabel = btn ? btn.textContent : "";
+      if (note) { note.classList.remove("ok", "err"); note.textContent = ""; }
+      if (btn) { btn.disabled = true; btn.textContent = "שולח..."; }
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: new FormData(form)
+        });
+        const data = await res.json();
+        if (data.success) {
+          if (note) { note.classList.add("ok"); note.textContent = "תודה! הפנייה נשלחה בהצלחה, אחזור אליכם בהקדם."; }
+          form.reset();
+        } else {
+          if (note) { note.classList.add("err"); note.textContent = "אירעה שגיאה בשליחה. נסו שוב, או התקשרו 050-589-1004."; }
+        }
+      } catch (err) {
+        if (note) { note.classList.add("err"); note.textContent = "אירעה שגיאה בשליחה. נסו שוב, או התקשרו 050-589-1004."; }
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = originalLabel; }
+      }
     });
   }
 
