@@ -282,6 +282,26 @@ html { scroll-behavior: smooth; }
 .form-msg.ok { display: block; background: rgba(110, 148, 144, .18); color: var(--teal-deep); }
 .form-msg.err { display: block; background: rgba(192, 57, 43, .12); color: #b23b2e; }
 
+/* ---------- Floating WhatsApp button ---------- */
+.wa-float {
+  position: fixed; right: 22px; bottom: 22px; z-index: 200;
+  width: 56px; height: 56px; border-radius: 50%; background: #25D366; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .25); transition: transform .2s, box-shadow .2s;
+}
+.wa-float svg { width: 30px; height: 30px; position: relative; z-index: 1; }
+.wa-float:hover { transform: scale(1.08); box-shadow: 0 8px 26px rgba(0, 0, 0, .32); }
+.wa-float::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(37, 211, 102, .5); animation: waPulse 2.2s infinite;
+}
+@keyframes waPulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, .5); }
+  70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+@media (max-width: 780px) { .wa-float { right: 16px; bottom: 16px; } }
+
 /* ---------- Footer ---------- */
 .footer { background: var(--teal-deep); color: rgba(255, 255, 255, .82); padding: 54px 0 26px; }
 .footer-top { display: flex; flex-wrap: wrap; gap: 30px; justify-content: space-between; align-items: flex-start; }
