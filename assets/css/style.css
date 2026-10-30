@@ -302,6 +302,30 @@ html { scroll-behavior: smooth; }
 }
 @media (max-width: 780px) { .wa-float { right: 16px; bottom: 16px; } }
 
+/* ---------- Apple-style polish (Tier 1) ---------- */
+/* 1. Instant press feedback — the element reacts the moment it's touched */
+.btn { transition: transform .12s ease-out, background-color .2s var(--ease), color .2s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease); }
+.btn:active { transform: scale(.97); }
+.nav-links a { transition: color .2s, background .2s, transform .12s ease-out; }
+.nav-links a:active { transform: scale(.96); }
+.wa-float:active { transform: scale(.93); }
+.client:active { transform: scale(.98); }
+
+/* 2. Typography: tighter tracking on large text (letters read too far apart as they grow) */
+.hero h1 { letter-spacing: -0.02em; }
+.section-title { letter-spacing: -0.015em; }
+
+/* 3. Respect reduced-motion preference (accessibility + polish) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+
 /* ---------- Footer ---------- */
 .footer { background: var(--teal-deep); color: rgba(255, 255, 255, .82); padding: 54px 0 26px; }
 .footer-top { display: flex; flex-wrap: wrap; gap: 30px; justify-content: space-between; align-items: flex-start; }
