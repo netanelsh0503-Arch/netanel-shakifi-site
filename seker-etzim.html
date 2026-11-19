@@ -2,6 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <script>document.documentElement.classList.add("js");</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Google tag (gtag.js) -->
@@ -27,10 +28,10 @@
   <meta property="og:image" content="https://netanelshakifi-nof.com/assets/img/web/hero.jpg">
   <meta property="og:locale" content="he_IL">
 
-  <link rel="stylesheet" href="assets/css/style.css?v=9">
+  <link rel="stylesheet" href="assets/css/style.css?v=10">
 
   <style>
-    .svc-hero { background: linear-gradient(to left, rgba(20,40,45,.55), rgba(20,40,45,.05) 62%), linear-gradient(105deg, #2c565f 0%, #6e9490 55%, #c9b79c 100%); color:#fff; padding: 140px 0 60px; }
+    .svc-hero { background: linear-gradient(to left, rgba(20,40,45,.68), rgba(20,40,45,.12) 62%), linear-gradient(105deg, #2c565f 0%, #6e9490 55%, #c9b79c 100%); color:#fff; padding: 140px 0 60px; }
     .svc-hero .eyebrow-line { color:#fff; font-weight:700; letter-spacing:.03em; font-size: clamp(.82rem,2.2vw,1rem); margin-bottom:12px; text-shadow:0 1px 8px rgba(0,0,0,.55); }
     .svc-hero h1 { color:#fff; font-size: clamp(1.9rem,5.5vw,3.2rem); line-height:1.15; margin-bottom:16px; letter-spacing:-0.02em; text-shadow:0 2px 16px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4); }
     .svc-hero p.lead { color:#fff; font-size: clamp(1.05rem,2.4vw,1.25rem); max-width:680px; text-shadow:0 1px 10px rgba(0,0,0,.55); }
@@ -53,6 +54,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">דלג לתוכן הראשי</a>
 
   <!-- ===== Header ===== -->
   <header class="header">
@@ -60,8 +62,8 @@
       <a href="index.html#top" class="brand" aria-label="נתנאל שקיפי – אדריכלות נוף">
         <img src="assets/logo/logo-mark.png" alt="לוגו נתנאל שקיפי">
       </a>
-      <button class="nav-toggle" aria-label="תפריט" aria-expanded="false"><span></span><span></span><span></span></button>
-      <nav class="nav-links" aria-label="ניווט ראשי">
+      <button class="nav-toggle" aria-label="תפריט" aria-expanded="false" aria-controls="primaryNav"><span></span><span></span><span></span></button>
+      <nav class="nav-links" id="primaryNav" aria-label="ניווט ראשי">
         <a href="about.html">אודות</a>
         <a href="index.html#services">שירותים</a>
         <a href="seker-etzim.html">סקר עצים</a>
@@ -71,6 +73,7 @@
       </nav>
     </div>
   </header>
+  <main id="main">
 
   <!-- ===== Hero ===== -->
   <section class="svc-hero">
@@ -174,6 +177,8 @@
   </article>
 
   <!-- ===== Footer ===== -->
+  </main>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
@@ -251,6 +256,6 @@
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.5 2 2 5.9 2 10.7c0 2.4 1.1 4.6 3 6.2v4.1l3.8-2.1c1 .3 2.1.4 3.2.4 5.5 0 10-3.9 10-8.6S17.5 2 12 2z"/></svg>
   </a>
 
-  <script src="assets/js/main.js?v=3"></script>
+  <script src="assets/js/main.js?v=4"></script>
 </body>
 </html>

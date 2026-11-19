@@ -2,6 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <script>document.documentElement.classList.add("js");</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Google tag (gtag.js) -->
@@ -70,9 +71,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=9">
+  <link rel="stylesheet" href="assets/css/style.css?v=10">
 </head>
 <body>
+  <a class="skip-link" href="#main">דלג לתוכן הראשי</a>
 
   <!-- ===== Header ===== -->
   <header class="header">
@@ -80,8 +82,8 @@
       <a href="#top" class="brand" aria-label="נתנאל שקיפי – אדריכלות נוף">
         <img src="assets/logo/logo-mark.png" alt="לוגו נתנאל שקיפי">
       </a>
-      <button class="nav-toggle" aria-label="תפריט" aria-expanded="false"><span></span><span></span><span></span></button>
-      <nav class="nav-links" aria-label="ניווט ראשי">
+      <button class="nav-toggle" aria-label="תפריט" aria-expanded="false" aria-controls="primaryNav"><span></span><span></span><span></span></button>
+      <nav class="nav-links" id="primaryNav" aria-label="ניווט ראשי">
         <a href="about.html">אודות</a>
         <a href="#services">שירותים</a>
         <a href="seker-etzim.html">סקר עצים</a>
@@ -91,6 +93,7 @@
       </nav>
     </div>
   </header>
+  <main id="main">
 
   <!-- ===== Hero ===== -->
   <section class="hero" id="top">
@@ -201,11 +204,11 @@
         <input type="hidden" name="from_name" value="אתר נתנאל שקיפי">
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="field">
-          <label for="name">שם מלא</label>
+          <label for="name">שם מלא <span class="req">(חובה)</span></label>
           <input type="text" id="name" name="name" required autocomplete="name" placeholder="השם שלך">
         </div>
         <div class="field">
-          <label for="phone">טלפון</label>
+          <label for="phone">טלפון <span class="req">(חובה)</span></label>
           <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="05X-XXXXXXX" dir="ltr" style="text-align:right">
         </div>
         <div class="field">
@@ -213,15 +216,17 @@
           <input type="email" id="email" name="email" autocomplete="email" placeholder="name@example.com" dir="ltr" style="text-align:right">
         </div>
         <div class="field">
-          <label for="message">איך אפשר לעזור?</label>
+          <label for="message">איך אפשר לעזור? <span class="req">(חובה)</span></label>
           <textarea id="message" name="message" required placeholder="ספרו לי על הפרויקט..."></textarea>
         </div>
         <button type="submit" class="btn btn-primary">שליחת פנייה</button>
         <p class="form-note">הפנייה נשלחת ישירות אליי ואחזור אליכם בהקדם.</p>
-        <div class="form-msg" id="formMsg" role="alert"></div>
+        <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
       </form>
     </div>
   </section>
+
+  </main>
 
   <!-- ===== Footer ===== -->
   <footer class="footer">
@@ -260,6 +265,6 @@
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.5 2 2 5.9 2 10.7c0 2.4 1.1 4.6 3 6.2v4.1l3.8-2.1c1 .3 2.1.4 3.2.4 5.5 0 10-3.9 10-8.6S17.5 2 12 2z"/></svg>
   </a>
 
-  <script src="assets/js/main.js?v=3"></script>
+  <script src="assets/js/main.js?v=4"></script>
 </body>
 </html>

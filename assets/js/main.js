@@ -17,12 +17,61 @@
       toggle.classList.toggle("open", open);
       toggle.setAttribute("aria-expanded", open);
     });
-    links.querySelectorAll("a").forEach((a) =>
-      a.addEventListener("click", () => {
-        links.classList.remove("open");
-        toggle.classList.remove("open");
-      })
-    );
+    const closeNav = (refocus) => {
+      links.classList.remove("open");
+      toggle.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      if (refocus) toggle.focus();
+    };
+    links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => closeNav(false)));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && links.classList.contains("open")) closeNav(true);
+    });
+  }
+
+  /* ---------- Dialog focus management (lightbox + about modal) ---------- */
+  const FOCUSABLE = 'a[href], button:not([disabled]), iframe, video[controls], input, textarea, select, [tabindex]:not([tabindex="-1"])';
+  const HAS_INERT = "inert" in HTMLElement.prototype;
+  let dialogState = null;
+  function focusablesIn(el) {
+    return [...el.querySelectorAll(FOCUSABLE)].filter((x) => {
+      const s = getComputedStyle(x);
+      return x.getClientRects().length && s.visibility !== "hidden";
+    });
+  }
+  function openDialog(el, initial, opener) {
+    if (dialogState) closeDialog(false);
+    const others = [...document.body.children].filter((c) => c !== el && c.tagName !== "SCRIPT");
+    others.forEach((c) => {
+      c.dataset.prevInert = c.inert ? "1" : "";
+      c.inert = true;
+      if (!HAS_INERT && !c.hasAttribute("aria-hidden")) { c.setAttribute("aria-hidden", "true"); c.dataset.ariaSet = "1"; }
+    });
+    const onKey = (e) => {
+      if (e.key !== "Tab") return;
+      const f = focusablesIn(el);
+      if (!f.length) { e.preventDefault(); return; }
+      const first = f[0], last = f[f.length - 1];
+      if (!el.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+      else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", onKey);
+    dialogState = { opener: opener || document.activeElement, others, onKey };
+    const target = initial || focusablesIn(el)[0];
+    if (target) target.focus();
+  }
+  function closeDialog(restore = true) {
+    if (!dialogState) return;
+    const { opener, others, onKey } = dialogState;
+    others.forEach((c) => {
+      c.inert = c.dataset.prevInert === "1";
+      delete c.dataset.prevInert;
+      if (c.dataset.ariaSet) { c.removeAttribute("aria-hidden"); delete c.dataset.ariaSet; }
+    });
+    document.removeEventListener("keydown", onKey);
+    dialogState = null;
+    if (restore && opener && document.contains(opener)) opener.focus();
   }
 
   /* ---------- Reveal on scroll ---------- */
@@ -64,14 +113,14 @@
     const count = (p.images || []).length;
     const coverSrc = nsrc(p.cover || (p.images || [])[0] || "");
     return `
-      <article class="project-card reveal" data-idx="${idx}" tabindex="0" role="button" aria-label="פתיחת פרויקט ${esc(p.title)}">
+      <article class="project-card reveal" data-idx="${idx}">
         <div class="project-media">
-          ${coverSrc ? `<img src="${esc(coverSrc)}" alt="${esc(p.title)}" loading="lazy">` : ""}
-          ${p.video ? `<span class="project-play">${IC.play}</span>` : ""}
-          ${count > 1 ? `<span class="project-count">${IC.imgs}${count}</span>` : ""}
+          ${coverSrc ? `<img src="${esc(coverSrc)}" alt="" loading="lazy">` : ""}
+          ${p.video ? `<span class="project-play" aria-hidden="true">${IC.play}</span>` : ""}
+          ${count > 1 ? `<span class="project-count"><span aria-hidden="true">${IC.imgs}</span>${count}<span class="sr-only"> תמונות</span></span>` : ""}
         </div>
         <div class="project-info">
-          <h3>${esc(p.title)}</h3>
+          <h2><button type="button" class="project-open"><span class="sr-only">פתיחת פרויקט: </span>${esc(p.title)}</button></h2>
           ${meta ? `<div class="project-meta">${meta}</div>` : ""}
           <div class="project-tags">${tags}</div>
         </div>
@@ -87,13 +136,9 @@
       ? list.map(({ p, i }) => projectCard(p, i)).join("")
       : `<p class="empty">אין פרויקטים בקטגוריה זו עדיין.</p>`;
     grid.querySelectorAll(".project-card").forEach((c) => {
-      c.querySelectorAll(".reveal").length; // no-op
       io.observe(c);
-      const open = () => openLightbox(+c.dataset.idx, 0);
-      c.addEventListener("click", open);
-      c.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
-      });
+      const btn = c.querySelector(".project-open");
+      btn.addEventListener("click", () => openLightbox(+c.dataset.idx, 0, btn));
     });
   }
 
@@ -105,7 +150,7 @@
     filterWrap.innerHTML = tags
       .map(
         (t) =>
-          `<button class="filter ${t === "all" ? "active" : ""}" data-f="${esc(t)}">${
+          `<button type="button" class="filter ${t === activeFilter ? "active" : ""}" data-f="${esc(t)}" aria-pressed="${t === activeFilter}">${
             t === "all" ? "הכל" : esc(t)
           }</button>`
       )
@@ -113,8 +158,9 @@
     filterWrap.querySelectorAll(".filter").forEach((b) =>
       b.addEventListener("click", () => {
         activeFilter = b.dataset.f;
-        filterWrap.querySelectorAll(".filter").forEach((x) => x.classList.remove("active"));
+        filterWrap.querySelectorAll(".filter").forEach((x) => { x.classList.remove("active"); x.setAttribute("aria-pressed", "false"); });
         b.classList.add("active");
+        b.setAttribute("aria-pressed", "true");
         renderProjects();
       })
     );
@@ -150,6 +196,7 @@
     lb.className = "lightbox";
     lb.setAttribute("role", "dialog");
     lb.setAttribute("aria-modal", "true");
+    lb.setAttribute("aria-labelledby", "lbTitle");
     lb.innerHTML = `
       <button class="lb-close" aria-label="סגירה">&times;</button>
       <div class="lb-inner">
@@ -184,7 +231,7 @@
     });
   }
 
-  function openLightbox(pi, ii) {
+  function openLightbox(pi, ii, opener) {
     if (!lb) buildLightbox();
     curP = pi; curI = ii || 0;
     const p = PROJECTS[pi];
@@ -214,6 +261,7 @@
     lb.classList.add("open");
     document.body.style.overflow = "hidden";
     showMedia();
+    openDialog(lb, lb.querySelector(".lb-close"), opener);
   }
 
   function showMedia() {
@@ -225,7 +273,10 @@
         ? `<video src="${esc(m.src)}" controls playsinline autoplay></video>`
         : `<iframe src="${esc(m.src)}" title="${esc(p.title)}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>`;
     } else {
-      lbMedia.innerHTML = `<img src="${esc(m.src)}" alt="${esc(p.title)}">`;
+      const imgs = curMedia.filter((x) => x.type === "img");
+      const n = imgs.indexOf(m) + 1;
+      const alt = imgs.length > 1 ? `${p.title} – תמונה ${n} מתוך ${imgs.length}` : p.title;
+      lbMedia.innerHTML = `<img src="${esc(m.src)}" alt="${esc(alt)}">`;
     }
     lbThumbs.querySelectorAll(".lb-thumb").forEach((t, i) => t.classList.toggle("active", i === curI));
     const hide = curMedia.length < 2;
@@ -244,18 +295,70 @@
     lb.classList.remove("open");
     if (lbMedia) lbMedia.innerHTML = ""; // stop video/iframe playback
     document.body.style.overflow = "";
+    closeDialog();
   }
 
   /* ---------- Contact form (Web3Forms) ---------- */
   const form = document.getElementById("contactForm");
   if (form) {
     const note = document.getElementById("formMsg");
+    const RULES = {
+      name: (v) => v.trim().length >= 2 || "נא למלא שם מלא.",
+      phone: (v) => /^(?:\+?972|0)\d{8,9}$/.test(v.replace(/[\s\-().]/g, "")) || "נא למלא מספר טלפון תקין, לדוגמה 050-1234567\u200F.",
+      email: (v) => !v.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || "כתובת האימייל אינה תקינה.",
+      message: (v) => v.trim().length >= 2 || "נא לכתוב כמה מילים על הפרויקט.",
+    };
+    const setFieldError = (input, msg) => {
+      const id = input.id + "-err";
+      let err = document.getElementById(id);
+      if (msg) {
+        if (!err) {
+          err = document.createElement("p");
+          err.className = "field-err";
+          err.id = id;
+          input.insertAdjacentElement("afterend", err);
+        }
+        err.textContent = msg;
+        input.setAttribute("aria-invalid", "true");
+        input.setAttribute("aria-describedby", id);
+      } else {
+        if (err) err.remove();
+        input.removeAttribute("aria-invalid");
+        input.removeAttribute("aria-describedby");
+      }
+    };
+    const validate = () => {
+      let firstBad = null;
+      Object.keys(RULES).forEach((name) => {
+        const input = form.elements[name];
+        if (!input) return;
+        const res = RULES[name](input.value || "");
+        setFieldError(input, res === true ? "" : res);
+        if (res !== true && !firstBad) firstBad = input;
+      });
+      return firstBad;
+    };
+    Object.keys(RULES).forEach((name) => {
+      const input = form.elements[name];
+      if (input) input.addEventListener("input", () => {
+        if (input.getAttribute("aria-invalid") === "true" && RULES[name](input.value || "") === true) setFieldError(input, "");
+      });
+    });
+    let sending = false;
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      if (sending) return;
       const btn = form.querySelector('button[type="submit"]');
       const originalLabel = btn ? btn.textContent : "";
       if (note) { note.classList.remove("ok", "err"); note.textContent = ""; }
-      if (btn) { btn.disabled = true; btn.textContent = "שולח..."; }
+      const firstBad = validate();
+      if (firstBad) {
+        if (note) { note.classList.add("err"); note.textContent = "לא ניתן לשלוח: יש לתקן את השדות המסומנים."; }
+        firstBad.focus();
+        return;
+      }
+      sending = true;
+      if (btn) { btn.setAttribute("aria-disabled", "true"); btn.textContent = "שולח..."; }
       try {
         const res = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
@@ -267,12 +370,13 @@
           if (note) { note.classList.add("ok"); note.textContent = "תודה! הפנייה נשלחה בהצלחה, אחזור אליכם בהקדם."; }
           form.reset();
         } else {
-          if (note) { note.classList.add("err"); note.textContent = "אירעה שגיאה בשליחה. נסו שוב, או התקשרו 050-589-1004."; }
+          if (note) { note.classList.add("err"); note.textContent = "אירעה שגיאה בשליחה. נסו שוב, או התקשרו 050-589-1004\u200F."; }
         }
       } catch (err) {
-        if (note) { note.classList.add("err"); note.textContent = "אירעה שגיאה בשליחה. נסו שוב, או התקשרו 050-589-1004."; }
+        if (note) { note.classList.add("err"); note.textContent = "אירעה שגיאה בשליחה. נסו שוב, או התקשרו 050-589-1004\u200F."; }
       } finally {
-        if (btn) { btn.disabled = false; btn.textContent = originalLabel; }
+        sending = false;
+        if (btn) { btn.removeAttribute("aria-disabled"); btn.textContent = originalLabel; }
       }
     });
   }
@@ -296,6 +400,7 @@
     aboutModal.className = "cmodal";
     aboutModal.setAttribute("role", "dialog");
     aboutModal.setAttribute("aria-modal", "true");
+    aboutModal.setAttribute("aria-labelledby", "amTitle");
     aboutModal.innerHTML =
       '<div class="cmodal-box">' +
         '<button class="cmodal-x" aria-label="סגירה">&times;</button>' +
@@ -319,8 +424,9 @@
     document.getElementById("amBody").innerHTML = (a.paragraphs || []).map((p) => `<p>${esc(p)}</p>`).join("");
     aboutModal.classList.add("open");
     document.body.style.overflow = "hidden";
+    openDialog(aboutModal, aboutModal.querySelector(".cmodal-x"));
   }
-  function closeAbout() { aboutModal.classList.remove("open"); document.body.style.overflow = ""; }
+  function closeAbout() { aboutModal.classList.remove("open"); document.body.style.overflow = ""; closeDialog(); }
 
   document.querySelectorAll('a[href="#about"]').forEach((a) =>
     a.addEventListener("click", (e) => { e.preventDefault(); openAbout(); })
