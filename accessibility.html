@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <script>document.documentElement.classList.add("js");</script>
+  <script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("textSize");if(t==="115"||t==="130")document.documentElement.setAttribute("data-text-size",t);}catch(e){}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Google tag (gtag.js) -->
@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=10">
+  <link rel="stylesheet" href="assets/css/style.css?v=11">
   <style>
     .doc-header { background: var(--teal-deep); padding: 16px 0; }
     .doc-header .nav { display: flex; align-items: center; justify-content: space-between; }
@@ -74,10 +74,12 @@
         <li>שמירה על ניגודיות צבעים מספקת בין הטקסט לרקע.</li>
         <li>תוכן כתוב בשפה ברורה ופשוטה ככל הניתן.</li>
         <li>תצוגה מותאמת (רספונסיבית) למגוון גדלי מסך ומכשירים.</li>
+        <li>כפתור להגדלת גודל הטקסט, וכיבוד הגדרת גודל הגופן שנקבעה בדפדפן.</li>
       </ul>
 
       <h2>שינוי גודל התצוגה</h2>
-      <p>ניתן להגדיל או להקטין את תצוגת האתר בכל דפדפן באמצעות לחיצה על מקש <b>CTRL</b> יחד עם הסימן <b>+</b> להגדלה, או <b>–</b> להקטנה. לחיצה על <b>CTRL+0</b> תחזיר את התצוגה לגודל המקורי.</p>
+      <p>בפינה השמאלית התחתונה של כל עמוד יש כפתור נגישות (סמל דמות בעיגול). לחיצה עליו פותחת בחירה בין שלושה גדלי טקסט: רגיל, גדול (115%) וגדול מאוד (130%). הבחירה נשמרת במעבר בין עמודים.</p>
+      <p>בנוסף, ניתן להגדיל או להקטין את תצוגת האתר בכל דפדפן באמצעות לחיצה על מקש <b>CTRL</b> יחד עם הסימן <b>+</b> להגדלה, או <b>–</b> להקטנה. לחיצה על <b>CTRL+0</b> תחזיר את התצוגה לגודל המקורי.</p>
 
       <h2>סייגים לנגישות</h2>
       <p>אנו ממשיכים לפעול לשיפור נגישות האתר באופן שוטף. עם זאת, ייתכן שחלקים מסוימים באתר, או תכנים שהתקבלו מגורמים חיצוניים (כגון סרטונים מוטמעים מ-YouTube או Vimeo), טרם הונגשו במלואם. אם נתקלתם בקושי או בבעיית נגישות כלשהי, נשמח שתפנו אלינו – ונעשה כמיטב יכולתנו לתת מענה מהיר ולתקן את הנדרש.</p>
@@ -101,5 +103,6 @@
   </footer>
 
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script src="assets/js/text-size.js?v=1"></script>
 </body>
 </html>
